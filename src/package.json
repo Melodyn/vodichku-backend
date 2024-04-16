@@ -1,0 +1,35 @@
+{
+  "name": "@melodyn/vodichku-backend",
+  "version": "1.0.0",
+  "description": "",
+  "private": "true",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "NODE_ENV=development node --watch ./bin/index.js",
+    "test": "NODE_ENV=test vitest --run"
+  },
+  "bin": "./bin/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Melodyn/vodichku-backend.git"
+  },
+  "engines": {
+    "node": ">=21.x"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Melodyn/vodichku-backend/issues"
+  },
+  "homepage": "https://github.com/Melodyn/vodichku-backend#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "lodash": "^4.17.21",
+    "yup": "^1.4.0"
+  },
+  "devDependencies": {
+    "vitest": "^1.5.0"
+  }
+}
