@@ -5,7 +5,6 @@ import { ConfigValidationError } from '../utils/errors.js';
 
 describe('Positive cases', () => {
   let app;
-  console.log({ env: process.env.NODE_ENV });
 
   test('Run app', async () => {
     app = await run(process.env.NODE_ENV).catch((e) => e);

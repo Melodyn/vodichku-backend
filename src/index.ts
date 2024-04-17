@@ -1,6 +1,6 @@
-import { configValidator } from './utils/configValidator.js';
+import { configValidator } from './utils/configValidator';
 
-const run = async (envName) => {
+const run = async (envName: string) => {
   process.on('unhandledRejection', (err) => {
     if (!envName.toLowerCase().includes('test')) {
       console.error(err);

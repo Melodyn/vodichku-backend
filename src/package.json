@@ -4,9 +4,8 @@
   "description": "",
   "private": "true",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "dev": "NODE_ENV=development node --watch ./bin/index.js",
+    "dev": "NODE_ENV=development ts-node ./bin/index.ts",
     "test": "NODE_ENV=test vitest --run"
   },
   "bin": "./bin/index.js",
@@ -30,6 +29,10 @@
     "yup": "^1.4.0"
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.0",
+    "@types/node": "^20.12.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5",
     "vitest": "^1.5.0"
   }
 }

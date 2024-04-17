@@ -1,11 +1,9 @@
-import yup from 'yup';
+import * as yup from 'yup';
 import path from 'path';
 import _ from 'lodash';
 import dotenv from 'dotenv';
-import { ConfigValidationError } from './errors.js';
-import { __dirnameBuild } from './helpers.js';
+import { ConfigValidationError } from './errors';
 
-const __dirname = __dirnameBuild(import.meta.url);
 const envsMap = {
   prod: 'production',
   dev: 'development',
@@ -13,7 +11,7 @@ const envsMap = {
   invalid: 'invalid',
 };
 
-const readFromFile = (configPath) => dotenv.config({
+const readFromFile = (configPath: string) => dotenv.config({
   path: path.resolve(__dirname, '..', configPath),
 }).parsed;
 const envConfigMap = {
@@ -23,19 +21,19 @@ const envConfigMap = {
   [envsMap.invalid]: readFromFile('invalid.config'),
 };
 
-const checkEnv = (expected) => ([current], schema) => schema.default(current === expected);
+const checkEnv = (expected: string) => ([current]: string[], schema: yup.Schema) => schema.default(current === expected);
 
 const configSchema = yup.object({
   NODE_ENV: yup.string().oneOf(_.values(envsMap)).required(),
-  IS_TEST_ENV: yup.boolean().when('NODE_ENV', checkEnv(envsMap.test)),
-  IS_DEV_ENV: yup.boolean().when('NODE_ENV', checkEnv(envsMap.dev)),
-  IS_PROD_ENV: yup.boolean().when('NODE_ENV', checkEnv(envsMap.prod)),
+  IS_TEST_ENV: yup.boolean().when('NODE_ENV', checkEnv(envsMap.test)).required(),
+  IS_DEV_ENV: yup.boolean().when('NODE_ENV', checkEnv(envsMap.dev)).required(),
+  IS_PROD_ENV: yup.boolean().when('NODE_ENV', checkEnv(envsMap.prod)).required(),
   PORT: yup.number().required(),
   HOST: yup.string().required(),
   LOG_LEVEL: yup.string().required(),
 }).required();
 
-export const configValidator = (envName) => {
+export const configValidator = (envName: string) => {
   const envExists = _.has(envConfigMap, envName);
   if (!envExists) throw new Error(`Unexpected env "${envName}"`);
   const envConfig = envConfigMap[envName];
